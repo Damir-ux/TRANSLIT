@@ -3,9 +3,12 @@ const addButton = document.getElementById("add-button");
 const clearButton = document.getElementById("clear-button");
 const dictionaryRows = document.getElementById("dictionary-rows");
 
-let rowCounter = 1;
+let rowCounter = 2;
 
 function createTooltip(cell, text) {
+  const truncatedText = truncateText(text);
+  if (truncatedText === text) return;
+
   const tooltip = document.createElement("div");
   tooltip.className = "tooltip";
   tooltip.textContent = text;
@@ -13,9 +16,26 @@ function createTooltip(cell, text) {
 
   cell.addEventListener("mouseenter", () => {
     tooltip.style.display = "block";
+
     const rect = cell.getBoundingClientRect();
-    tooltip.style.left = `${rect.left + window.scrollX}px`;
-    tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight}px`;
+    const cellWidth = rect.width;
+    const cellLeft = rect.left + window.scrollX;
+    const cellTop = rect.top + window.scrollY;
+
+    if (cell.cellIndex === 0) {
+      tooltip.style.left = `${cellLeft + cellWidth / 2}px`;
+      tooltip.style.transform = "translateX(0%))";
+    } else if (cell.cellIndex === 1) {
+      tooltip.style.left = `${cellLeft + cellWidth / 2 - 148}px`;
+      tooltip.style.transform = "translateX(0%)";
+    } else if (cell.cellIndex === 2) {
+      tooltip.style.left = `${cellLeft + cellWidth / 2 - 48}px`;
+      tooltip.style.transform = "translateX(0%)";
+    } else {
+      tooltip.style.left = `${cellLeft + cellWidth / 2 - tooltip.offsetWidth / 2}px`;
+    }
+
+    tooltip.style.top = `${cellTop - tooltip.offsetHeight + 4}px`;
   });
 
   cell.addEventListener("mouseleave", () => {
@@ -86,21 +106,17 @@ function addRow() {
   russianTextSpan.textContent = truncateText(russianText);
   russianCell.appendChild(russianTextSpan);
 
-  createTooltip(russianCell, russianText);
-
   const transliterationCell = document.createElement("td");
   const transliterationTextSpan = document.createElement("span");
   transliterationTextSpan.className = "item-text";
   transliterationTextSpan.textContent = truncateText(transliteratedText);
   transliterationCell.appendChild(transliterationTextSpan);
 
-  createTooltip(transliterationCell, transliteratedText);
-
   const actionCell = document.createElement("td");
   const deleteButton = document.createElement("button");
   deleteButton.className = "delete-button";
+  deleteButton.textContent = "";
   deleteButton.addEventListener("click", deleteRow);
-
   actionCell.appendChild(deleteButton);
 
   row.appendChild(numberCell);
@@ -112,13 +128,37 @@ function addRow() {
 
   textInput.value = "";
 
-  russianTextSpan.addEventListener("click", () => {
-    showModal(russianText);
-  });
-  transliterationTextSpan.addEventListener("click", () => {
-    showModal(transliteratedText);
+  createTooltip(numberCell, `Row: ${rowCounter - 1}`);
+  createTooltip(russianCell, russianText);
+  createTooltip(transliterationCell, transliteratedText);
+
+  numberCell.addEventListener("mouseenter", () => {
+    createTooltip(numberCell, russianText);
   });
 }
+
+function deleteRow(event) {
+  const row = event.target.closest("tr");
+  row.remove();
+  updateRowNumbers();
+}
+
+function updateRowNumbers() {
+  rowCounter = 2;
+  const rows = document.querySelectorAll("#dictionary-rows tr");
+  rows.forEach((row, index) => {
+    if (index === 0) return;
+    row.cells[0].textContent = rowCounter++;
+  });
+}
+
+clearButton.addEventListener("click", () => {
+  const rows = document.querySelectorAll("#dictionary-rows tr");
+  rows.forEach((row, index) => {
+    if (index !== 0) row.remove();
+  });
+  rowCounter = 2;
+});
 
 addButton.addEventListener("click", addRow);
 
@@ -126,29 +166,4 @@ textInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     addRow();
   }
-});
-
-function showModal(text) {
-  modalContent.textContent = text;
-  modal.style.display = "block";
-}
-
-function deleteRow(event) {
-  const row = event.target.closest("tr");
-  row.remove();
-
-  updateRowNumbers();
-}
-
-function updateRowNumbers() {
-  rowCounter = 1;
-  const rows = document.querySelectorAll("#dictionary-rows tr");
-  rows.forEach((row) => {
-    row.cells[0].textContent = rowCounter++;
-  });
-}
-
-clearButton.addEventListener("click", () => {
-  dictionaryRows.innerHTML = "";
-  rowCounter = 1;
 });

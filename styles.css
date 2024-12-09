@@ -134,12 +134,14 @@ header {
 }
 
 
-
 .tooltip-cell {
     position: relative;
     cursor: pointer;
+    text-align: left;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: #F0F0F0;
 }
-
 
 .tooltip {
     display: none;
@@ -148,15 +150,12 @@ header {
     color: black;
     padding: 8px 16px;
     border-radius: 10px;
-    max-width: 300px;
-    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
     font-size: 16px;
-    font-weight: 400;
     white-space: normal;
     word-wrap: break-word;
     font-family: 'IBM Plex Mono', sans-serif;
-    z-index: 10001;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -196,8 +195,8 @@ header {
     border-left: none;
     background-color: #F0F0F0;
     text-align: left;
-    padding-left: 12px;
-    padding-right: 0;
+    padding: 12px;
+    position: relative;
     font-size: 14px;
     font-weight: 600;
 }
@@ -206,7 +205,7 @@ header {
 .dictionary th:nth-child(2),
 .dictionary td:nth-child(2) {
     border-left: none;
-    padding-left: 0;
+    padding-left: 90;
     border-top: none;
     background-color: #F0F0F0;
 
@@ -291,6 +290,14 @@ header {
     opacity: 0.7;
 }
 
+.firstButtonDel {
+    background-size: contain;
+    border: none;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
 
 
 .modal {
@@ -357,8 +364,7 @@ header {
 
 
 
-@media (max-width: 360px) {
-
+@media (max-width: 390px) {
 
     .container {
         max-width: 328px;
@@ -396,6 +402,11 @@ header {
         width: 24px;
         height: 24px;
 
+    }
+
+    .firstButtonDel {
+        width: 24px;
+        height: 24px;
     }
 
 
