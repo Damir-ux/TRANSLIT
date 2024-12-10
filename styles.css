@@ -217,7 +217,7 @@ header {
 .dictionary th:nth-child(2) span,
 .dictionary td:nth-child(2) span {
     position: relative;
-    left: -80px;
+    left: -30px;
 }
 
 
