@@ -213,15 +213,11 @@ header {
 
 }
 
-
 .dictionary th:nth-child(2) span,
 .dictionary td:nth-child(2) span {
     position: relative;
     left: -30px;
 }
-
-
-
 
 .dictionary th:nth-child(2),
 .dictionary td:nth-child(2),
@@ -231,12 +227,9 @@ header {
 }
 
 
-
 .dictionary th:nth-child(3),
 .dictionary td:nth-child(3) {
-
     padding-left: 28px;
-
 }
 
 
@@ -251,7 +244,6 @@ header {
 .dictionary th:nth-child(3),
 .dictionary td:nth-child(3),
 .dictionary td:nth-child(2) {
-
     border-top: none;
 }
 
@@ -260,14 +252,12 @@ header {
 {
     background-color: #D9D9D9;
     border-top: none;
-
 }
 
 .dictionary td:nth-child(3)
 {
     background-color: #D9D9D9;
     border-right: none;
-
 }
 
 
@@ -362,8 +352,6 @@ header {
     }
 }
 
-
-
 @media (max-width: 390px) {
 
     .container {
@@ -375,9 +363,7 @@ header {
         text-align: center;
     }
 
-
-    .logo {
-        
+    .logo {        
         font-size: 34px;
         font-weight: 600;
         line-height: 46.8px;
@@ -386,22 +372,17 @@ header {
     }
 
     .input-section {
-
         padding-bottom: 50px;
     }
 
 
     #text-input {
-
         font-size: 14px;
-
     }
     
     .delete-button {
-
         width: 24px;
         height: 24px;
-
     }
 
     .firstButtonDel {
@@ -417,9 +398,7 @@ header {
 
     .dictionary th:nth-child(3),
 .dictionary td:nth-child(3) {
-
     padding-left: 16px;
-
 }
 
 
@@ -427,7 +406,6 @@ header {
 .dictionary td:nth-child(2) span {
     left: -45px;
 }
-
 }
 
 

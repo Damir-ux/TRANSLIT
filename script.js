@@ -26,7 +26,7 @@ function createTooltip(cell, text) {
       tooltip.style.left = `${cellLeft + cellWidth / 2}px`;
       tooltip.style.transform = "translateX(0%))";
     } else if (cell.cellIndex === 1) {
-      tooltip.style.left = `${cellLeft + cellWidth / 2 - 148}px`;
+      tooltip.style.left = `${cellLeft + cellWidth / 2 - 108}px`;
       tooltip.style.transform = "translateX(0%)";
     } else if (cell.cellIndex === 2) {
       tooltip.style.left = `${cellLeft + cellWidth / 2 - 48}px`;
